@@ -4,7 +4,6 @@ on:
     branches: 
       - main
 env:
-  DOCKER_HOST: https://hub.docker.com
   DOCKER_REGISTRY_USER: vinothbuj85
   DOCKER_REGISTRY_PASS: ${{secrets.DOCKER_REGISTRY_PASS}}
 jobs:

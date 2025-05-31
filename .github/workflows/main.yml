@@ -31,7 +31,6 @@ jobs:
     - name: To deploy docker image
       run: |
         echo "$DOCKER_REGISTRY_PASS" | docker login -username "$DOCKER_REGISTRY_PASS" --password-stdin
-        docker container run --name webserver -itd vinothbuj85/webserver:${{env.GITHUB_SHA}}
-        
+        docker container run --name webserver -itd vinothbuj85/webserver
       
       

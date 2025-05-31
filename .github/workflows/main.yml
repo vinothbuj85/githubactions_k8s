@@ -12,10 +12,18 @@ jobs:
     steps:
     - name: To checkout source code
       uses: actions/checkout@v2
-    - name: To setup docker
-      uses: docker/build-push-action@v2
+    - name: To run the below command 
+      run: cat /etc/passwd
+    - name: Tp login to the docker image
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+        username: ${{env.DOCKER_REGISTRY_USER}}
+        password: ${{env.DOCKER_REGISTRY_PASS}}
+    - name: To push image 
+      uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
       with:
         context: .
+        file: ./Dockerfile
         push: true
         tags: vinothbuj85/webserver:${{env.GITHUB_SHA}}
         username: ${{env.DOCKER_REGISTRY_USER}}

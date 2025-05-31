@@ -1,0 +1,30 @@
+name: To work on github actions 
+on:
+  push:
+    branches: 
+      - main
+env:
+  DOCKER_HOST: https://hub.docker.com
+  DOCKER_REGISTRY_USER: vinothbuj85
+  DOCKER_REGISTRY_PASS: ${{secrets.DOCKER_REGISTRY_PASS}}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: To checkout source code
+      uses: actions/checkout@v2
+    - name: To setup docker
+      uses: docker/build-push-asction@v2
+      with:
+        context: .
+        push: true
+        tags: vinothbuj85/webserver:${{env.GITHUB_SHA}}
+        username: ${{env.DOCKER_REGISTRY_USER}}
+        password: ${{env.DOCKER_REGISTRY_PASS}}
+    - name: To deploy docker image
+      run: |
+        echo "$DOCKER_REGISTRY_PASS" | docker login -username "$DOCKER_REGISTRY_PASS" --password-stdin
+        docker container run --name webserver -itd vinothbuj85/webserver:${{env.GITHUB_SHA}}
+        
+      
+      

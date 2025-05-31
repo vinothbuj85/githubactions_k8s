@@ -1,4 +1,4 @@
-name: To work on github actions 
+name: To work on github actions to build  docker image
 on:
   push:
     branches: 

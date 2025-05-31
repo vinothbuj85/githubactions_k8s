@@ -30,7 +30,6 @@ jobs:
         password: ${{env.DOCKER_REGISTRY_PASS}}
     - name: To deploy docker image
       run: |
-        echo "$DOCKER_REGISTRY_PASS" | docker login -username "$DOCKER_REGISTRY_PASS" --password-stdin
         docker container run --name webserver -itd vinothbuj85/webserver
       
       
